@@ -95,7 +95,9 @@ export const fetchNotes = (userId) => {
 
 export const createNote = (note) => {
   return async (dispatch) => {
-    const response = await axios.post("/api/notes", note);
+    const response = await axios.post("/api/notes", note, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
     dispatch({ type: "ADD_NOTE", note: response.data });
   };
 };

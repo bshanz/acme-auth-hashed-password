@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Note } = require("../db");
+const restricted = require("../middleware");
 
 router.get("/user/:userId", async (req, res, next) => {
   try {
@@ -14,10 +15,14 @@ router.get("/user/:userId", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", restricted, async (req, res, next) => {
   try {
-    const note = await Note.create(req.body);
-    res.send(note);
+    if (req.user) {
+      const note = await Note.create(req.body);
+      res.send(note);
+    } else {
+      next(new Error("Not authorized"));
+    }
   } catch (err) {
     next(err);
   }

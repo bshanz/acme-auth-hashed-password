@@ -16,3 +16,6 @@ npm-debug.log
 
 package.lock.json
 package-lock.json
+
+# ignore env file
+.env

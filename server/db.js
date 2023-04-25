@@ -46,6 +46,7 @@ User.prototype.generateToken = function () {
 
 User.register = async function (credentials) {
   const user = await this.create(credentials);
+  console.log(`user registered: ${user}`);
   return user.generateToken();
 };
 

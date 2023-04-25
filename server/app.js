@@ -2,6 +2,9 @@ const express = require("express");
 const path = require("path");
 const { Product, User, Note } = require("./db"); // Import Note from your db.js
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
